@@ -10,12 +10,16 @@ public class Watermelons {
 	 * @return the number of pairs of elements in the specified array
 	 */
 	public static int pairCount(int[] array) {
-		
-			// TODO: Delete the line below and implement this method
-			throw new NotYetImplementedException();
-		
+		// TODO: Delete the line below and implement this method
+		int length = array.length;
+		if(length % 2 == 0) {
+			return (length/2 * length) - length/2;
+		}
+		else {
+			return (length/2) * length;
+		}
 	}
-
+	
 	/**
 	 * Computes the sum of each distinct pair of entries in the incoming array.
 	 * A given pair of entries has its sum computed only once. So if you
@@ -30,13 +34,21 @@ public class Watermelons {
 	 * @return an array containing the sums of pairs as described above
 	 */
 	public static int[] allPairSums(int[] weights) {
-		
-			// TODO: Delete the line below and implement this method
-			throw new NotYetImplementedException();
-		
+
+		int[] sumArray = new int[pairCount(weights)];
+		int index = 0;
+
+		for(int i = 0; i < weights.length; i++) {
+			for(int j = i + 1; j < weights.length; j++) {
+
+				sumArray[index] = weights[i] + weights[j];
+				index++;
+			}
+		}	
+		return sumArray;
 	}
 
-	
+
 
 	/**
 	 * @param array: an array, not to be mutated
@@ -85,9 +97,34 @@ public class Watermelons {
 			throw new IllegalArgumentException(
 					"pairSums must be an array of length " + expectedLength + " " + Arrays.toString(pairSums));
 		}
-		
-			// TODO: Delete the line below and implement this method
-			throw new NotYetImplementedException();
-		
+
+		// TODO: Delete the line below and implement this method
+		int[] weights = new int[5];
+
+		int[] x = toSortedCopy(pairSums);
+
+
+		for(int i = 0; i < x[x.length-1]; i++) {
+			weights[0] = i;
+			for(int j = 0; j < x[x.length-1]; j++) {
+				weights[1] = j;
+				for(int k = 0; k < x[x.length-1]; k++) {
+					weights[2] = k;
+					for(int l = 0; l < x[x.length-1]; l++) {
+						weights[3] = l;
+						for(int m = 0; m < x[x.length-1]; m++) {
+							weights[4] = m;
+							if(equalsIgnoringOrder(allPairSums(weights), pairSums)) {
+								return weights;
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		return weights;
+
 	}
 }

@@ -6,7 +6,10 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Graph {
 	private static void graphLine(int[] ys) {
-		
+		int centerIndex = ys.length/2;
+		for(int i = 0; i < ys.length - 1; i++){
+			StdDraw.line(i,ys[i],i+1,ys[i+1]);
+		}
 		// TODO
 	}
 
