@@ -1,5 +1,7 @@
 package divinelines;
 
+import java.awt.Color;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Lines {
@@ -11,9 +13,22 @@ public class Lines {
 	 * @param y2 y coordinate of ending point
 	 */
 	public static void drawLine(double x1, double y1, double x2, double y2) {
+		StdDraw.setPenColor(Color.BLACK);
 		// FIXME -- fill in this method according to the instructions
 		
-
+		StdDraw.setPenRadius(0.002);
+		StdDraw.point(x1, y1);
+		
+		double length = Math.hypot(x1-x2, y1-y2);
+		if(length < 0.007 ) {
+			return;
+		}
+		
+		
+		drawLine((x1 + x2)/2,(y1+y2)/2,x2,y2);
+		drawLine(x1, y1, (x1 + x2)/2,(y1+y2)/2);
+		
+		
 		// Note: StdDraw.show() is required to draw that which is 
 		// deferred by StdDraw.enableDoubleBuffering();
 		StdDraw.show();
@@ -24,7 +39,7 @@ public class Lines {
 	 */
 	public static void main(String[] args) {
 		// uncomment the line below when you are ready to speed up the drawing
-		// StdDraw.enableDoubleBuffering();
+		 StdDraw.enableDoubleBuffering();
 
 		StdDraw.setPenRadius(0.002);
 		//
@@ -46,5 +61,5 @@ public class Lines {
 		System.out.println("done drawing");
 	}
 
-	
+
 }
