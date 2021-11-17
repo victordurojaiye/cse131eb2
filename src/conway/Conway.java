@@ -4,6 +4,9 @@ import support.cse131.NotYetImplementedException;
 
 public class Conway {
 
+	private int rows,cols;
+	public boolean[][] board;
+
 	/**
 	 * Constructs a new Conway board rows X columns in size with each cell's alive
 	 * status false.
@@ -14,9 +17,12 @@ public class Conway {
 	public Conway(int rows, int cols) {
 
 		// FIXME
-		throw new NotYetImplementedException();
+		this.rows = rows;
+		this.cols = cols;
+		board = new boolean[rows][cols];
 
-	}
+	} 
+
 
 	/**
 	 * @return the number of rows
@@ -24,7 +30,7 @@ public class Conway {
 	public int getRows() {
 
 		// FIXME
-		throw new NotYetImplementedException();
+		return rows;
 
 	}
 
@@ -34,7 +40,7 @@ public class Conway {
 	public int getColumns() {
 
 		// FIXME
-		throw new NotYetImplementedException();
+		return cols;
 
 	}
 
@@ -48,7 +54,11 @@ public class Conway {
 	public void setAlive(boolean isAlive, int row, int col) {
 
 		// FIXME
-		throw new NotYetImplementedException();
+
+		if(isAlive == true) {
+			board[row][col] = true;
+		}
+
 
 	}
 
@@ -61,7 +71,19 @@ public class Conway {
 	public boolean isAlive(int row, int col) {
 
 		// FIXME
-		throw new NotYetImplementedException();
+
+
+		if( ( row < 0 || row >= rows)|| ( col < 0 || col >= cols)) {
+			return false;
+		}
+
+		else if(board[row][col] == true) {
+			return true;
+		}
+
+		else {
+			return false;
+		}
 
 	}
 
@@ -71,7 +93,11 @@ public class Conway {
 	public void clear() {
 
 		// FIXME
-		throw new NotYetImplementedException();
+		for(int i = 0; i < rows; i++){
+			for(int j = 0; j < cols; j++) {	
+				board[i][j] = false;
+			}
+		}
 
 	}
 
@@ -95,9 +121,42 @@ public class Conway {
 	public int countLivingNeighbors(int row, int col) {
 
 		// FIXME
-		throw new NotYetImplementedException();
 
+		int count = 0;
+
+		if( (( row >= 1 || row < rows -1)|| ( col >= 1 || col < cols -1))) {
+
+			if(isAlive(row-1,col)) {
+				count++;
+			}
+			if(isAlive(row-1,col-1)) {
+				count++;
+			}
+			if(isAlive(row,col-1)) {
+				count++;
+			}
+			if(isAlive(row+1,col)) {
+				count++;
+			}
+			if(isAlive(row+1,col+1)) {
+				count++;
+			}
+			if(isAlive(row-1,col+1)) {
+				count++;
+			}
+			if(isAlive(row+1,col-1)) {
+				count++;
+			}
+			if(isAlive(row,col+1)) {
+				count++;
+			}
+
+			return count;
+		}
+
+		return count;
 	}
+
 
 	/**
 	 * Executes a generation of life. Be sure to read the specification
@@ -106,9 +165,39 @@ public class Conway {
 	 * 
 	 */
 	public void step() {
-
 		// FIXME
-		throw new NotYetImplementedException();
 
+		boolean [][] originalConway = board;
+		boolean [][] newConway = new boolean[rows][cols];
+
+		for( int i = 0; i < rows; i++) {
+			for( int j = 0; j < cols; j++) {
+				newConway[i][j]= board[i][j];
+			}
+		}
+		
+		for( int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+
+				if(!isAlive(i,j)) {
+					if(countLivingNeighbors(i,j) == 3) {
+						newConway[i][j] = true;
+						//	System.out.println("C");
+					}
+				}
+				else {
+					if(countLivingNeighbors(i,j) == 2 || countLivingNeighbors(i,j) == 3) {
+						newConway[i][j] = true;
+						//	System.out.println("A");
+					}
+					else{
+						newConway[i][j] = false;
+						//	System.out.println("B");
+					}
+				}
+			}
+		}
+		board = newConway;
 	}
+
 }

@@ -4,12 +4,24 @@ public class Patterns {
 	public static void yourDesignOne(Conway conway) {
 
 		// TODO
-
+		conway.clear();
+		conway.setAlive(true, 2, 2);
+		conway.setAlive(true, 2, 4);
+		conway.setAlive(true, 3, 1);
+		conway.setAlive(true, 3, 1);
+		conway.setAlive(true, 1, 2);
+		conway.setAlive(true, 3, 3);
 	}
-
 	public static void yourDesignTwo(Conway conway) {
 
 		// TODO
+		conway.clear();
+		conway.setAlive(true, 4, 2);
+		conway.setAlive(true, 7, 2);
+		conway.setAlive(true, 2, 1);
+		conway.setAlive(true, 1, 1);
+		conway.setAlive(true, 3, 2);
+		conway.setAlive(true, 3, 4);
 
 	}
 
